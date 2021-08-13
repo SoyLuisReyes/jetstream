@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'address',
-        'city_id' 
+        'city_id'
     ];
 
     /**
@@ -61,4 +61,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function listings()
+    {
+        return $this->hasMany(Listing::class);
+    }
 }
