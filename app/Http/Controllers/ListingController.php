@@ -14,7 +14,9 @@ class ListingController extends Controller
      */
     public function index()
     {
-        //
+        $listings = Listing::all();
+
+        return view('listings.index', \compact('listings'));
     }
 
     /**
