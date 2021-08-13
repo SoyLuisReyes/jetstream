@@ -25,6 +25,12 @@ class RegisterStepTwoController extends Controller
             'city_id' => $request->city_id,
         ]);
 
+
+        if ($request->hasFile('photo')) {
+            auth()->user()->updateProfilePhoto($request->photo);
+        }
+
+
         return redirect()->route('dashboard');
     }
 }

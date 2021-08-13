@@ -6,10 +6,10 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register-step2.post') }}">
+        <form method="POST" action="{{ route('register-step2.post') }}" enctype="multipart/form-data">
             @csrf
 
-            <div>
+            <div class="mt-4">
                 <x-jet-label for="phone" value="{{ __('Phone') }}" />
                 <x-jet-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')"/>
             </div>
@@ -26,6 +26,11 @@
                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="photo" value="{{ __('Profile Photo') }}" />
+                <input type="file" name="photo">
             </div>
 
             <div class="flex items-center justify-end mt-4">
