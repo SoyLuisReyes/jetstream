@@ -38,7 +38,7 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
-        listing::create($request->all());
+        listing::create($request->validated());
 
         return redirect()->route('listings.index');
     }
@@ -62,7 +62,7 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
-        //
+        return view('listings.edit', \compact('listing'));
     }
 
     /**
@@ -72,9 +72,11 @@ class ListingController extends Controller
      * @param  \App\Models\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Listing $listing)
+    public function update(StoreListingRequest $request, Listing $listing)
     {
-        //
+
+        $listing->update($request->validated());
+        return redirect()->route('listings.index');
     }
 
     /**
@@ -85,6 +87,7 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
-        //
+        $listing->delete();
+        return redirect()->route('listings.index');
     }
 }

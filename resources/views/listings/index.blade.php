@@ -16,14 +16,27 @@
                           <th class="px-4 py-3">Title</th>
                           <th class="px-4 py-3">Description</th>
                           <th class="px-4 py-3">Price</th>
+                          <th class="px-4 py-3" colspan="2">Action</th>
                         </tr>
 
-                        <tbody>
+                        <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($listings as $listing)
                                 <tr>
                                     <td>{{ $listing->title }}</td>
                                     <td>{{ $listing->description }}</td>
                                     <td>${{ $listing->price }}</td>
+                                    <td>
+                                        <a href="{{ route('listings.edit', $listing)}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">Edit</a>
+                                    </td>
+
+                                    <td>
+                                        <form action="{{ route('listings.destroy', $listing)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-jet-danger-button type="submit" onclick="return confirm('Are you sure?')" >Delete</x-jet-danger-button>
+                                        </form>
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
